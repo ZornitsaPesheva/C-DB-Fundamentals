@@ -44,3 +44,23 @@ ALTER TABLE Employees
 ADD CONSTRAINT FK_AddressId
 FOREIGN KEY (AddressId)
 REFERENCES Addresses(Id)
+
+USE master
+-- backup, delete and restore
+USE SoftUni
+
+INSERT INTO Towns
+	(Name)
+	VALUES
+		('Sofia'),
+		('Plovdiv'),
+		('Varna'),
+		('Burgas')
+
+INSERT INTO Departments
+	(Name)
+	VALUES
+		('Engineering'),
+		('Sales'),
+		('Software Development'),
+		('Quality Assurance')
