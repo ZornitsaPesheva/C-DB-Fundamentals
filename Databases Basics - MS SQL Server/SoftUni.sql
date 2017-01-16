@@ -1,3 +1,5 @@
+USE SoftUni
+
 CREATE TABLE Towns
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -26,8 +28,8 @@ CREATE TABLE Employees
 	JobTitle NVARCHAR(50) NOT NULL,
 	DepartmentId INT NOT NULL,
 	HireDate DATE NOT NULL,
-	Salary INT NOT NULL,
-	AddressId INT NOT NULL
+	Salary FLOAT NOT NULL,
+	AddressId INT
 )
 
 ALTER TABLE Addresses
@@ -45,7 +47,17 @@ ADD CONSTRAINT FK_AddressId
 FOREIGN KEY (AddressId)
 REFERENCES Addresses(Id)
 
-USE master
+--USE master
+--ALTER TABLE Addresses
+--DROP CONSTRAINT FK_TownId
+
+--ALTER TABLE Employees
+--DROP CONSTRAINT FK_DepartmentId
+
+--ALTER TABLE Employees
+--DROP CONSTRAINT FK_AddressId
+
+
 -- backup, delete and restore
 USE SoftUni
 
@@ -62,5 +74,16 @@ INSERT INTO Departments
 	VALUES
 		('Engineering'),
 		('Sales'),
+		('Marketing'),
 		('Software Development'),
 		('Quality Assurance')
+
+
+INSERT INTO Employees
+	(FirstName, MiddleName, LastName, JobTitle, DepartmentId, HireDate, Salary)
+	VALUES
+		('Ivan', 'Ivanov', 'Ivanov', '.NET Developer', 4, '2013-02-01', 3500),
+		('Petar', 'Petrov', 'Petrov', 'Senior Engineer', 1, '2004-03-02', 4000),
+		('Maria', 'Petrova', 'Ivanova', 'Intern', 5, '2016-08-28', 525.25),
+		('Georgi', 'Teziev', 'Ivanov', 'CEO', 2, '2007-12-09', 3000),
+		('Peter', 'Pan', 'Pan', 'Intern', 3, '2016-08-28', 599.88)
