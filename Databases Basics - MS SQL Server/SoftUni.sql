@@ -124,3 +124,12 @@ SET Salary = Salary + Salary * 10 / 100
 
 SELECT Salary from Employees
 
+--23.
+USE HOTEL
+
+UPDATE Payments
+SET TaxRate = TaxRate - TaxRate * 3 / 100
+
+SELECT TaxRate FROM Payments
+
+DELETE FROM Occupancies
