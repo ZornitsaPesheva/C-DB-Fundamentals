@@ -62,7 +62,8 @@ SELECT FirstName, LastName, Salary
 FROM Employees
 
 --17
---CREATE VIEW V_EmployeeNameJobTitle AS
---SELECT FirstName + ' ' + MiddleName + ' ' +  LastName AS 'Full Name', JobTitle AS 'Job Title'
---FROM Employees
+CREATE VIEW V_EmployeeNameJobTitle AS
+SELECT FirstName + ' ' + ISNULL(MiddleName, '') + ' ' +  LastName AS 'Full Name', JobTitle AS 'Job Title'
+FROM Employees
 
+--18
