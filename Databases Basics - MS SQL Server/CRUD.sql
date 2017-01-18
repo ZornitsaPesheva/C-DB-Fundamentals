@@ -67,3 +67,12 @@ SELECT FirstName + ' ' + ISNULL(MiddleName, '') + ' ' +  LastName AS 'Full Name'
 FROM Employees
 
 --18
+SELECT DISTINCT JobTitle FROM Employees
+
+--19
+SELECT TOP 10 * FROM Projects
+ORDER BY StartDate, Name 
+
+--20
+SELECT top 7 FirstName, LastName, HireDate FROM Employees
+ORDER BY HireDate DESC
