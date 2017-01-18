@@ -76,3 +76,28 @@ ORDER BY StartDate, Name
 --20
 SELECT top 7 FirstName, LastName, HireDate FROM Employees
 ORDER BY HireDate DESC
+
+--21
+UPDATE Employees
+SET Salary = Salary + Salary * 12 / 100
+WHERE DepartmentID IN (1, 2, 4, 11)
+
+SELECT Salary FROM Employees
+
+UPDATE Employees
+SET Salary *= 1.12
+FROM Employees AS e
+JOIN Departments AS d
+ON e.DepartmentID = d.DepartmentID
+WHERE d.Name IN  ('Engineering', 'Tool Design', 'Marketing', 'Information Services')
+
+SELECT Salary FROM Employees
+
+--22
+SELECT PeakName FROM Peaks
+ORDER BY PeakName 
+
+--23
+SELECT TOP 30 CountryName, Population FROM Countries
+WHERE ContinentCode = 'EU'
+ORDER BY Population DESC, CountryName
