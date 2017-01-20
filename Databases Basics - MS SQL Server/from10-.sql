@@ -1,0 +1,16 @@
+ALTER TABLE Users
+ADD CONSTRAINT check_pass CHECK (len(Pasword) >=6)
+
+ALTER TABLE Users
+ADD CONSTRAINT df_LAstLoginTime DEFAULT GETDATE() FOR LAstLoginTime
+
+ALTER TABLE Users
+DROP CONSTRAINT PK__Users
+
+ALTER TABLE Users
+ADD PRIMARY KEY (Id)
+
+ALTER TABLE Users 
+ADD CONSTRAINT un_len CHECK (len(Username) >=3)
+
+
