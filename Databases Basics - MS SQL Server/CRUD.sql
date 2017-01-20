@@ -110,3 +110,7 @@ SELECT CountryName, CountryCode, Currency =
 	END
 	FROM Countries
 ORDER BY CountryName
+
+--25
+SELECT Name FROM [dbo].[Characters]
+ORDER BY Name
