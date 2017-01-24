@@ -59,5 +59,28 @@ WHERE YEAR(Start) = '2011' OR YEAR(Start) = '2012'
 ORDER BY Start, Name
 
 --13
+SELECT Username, SUBSTRING(Email, CHARINDEX('@', Email)+1, len(Email)) AS 'Email Provider' FROM Users
+ORDER BY 'Email Provider', Username
 
+--14
+SELECT Username, IpAddress AS 'IP Address' FROM Users
+WHERE IpAddress LIKE '___.1_%._%.___'
+ORDER BY Username
+
+--15
+SELECT Name AS Game, 'Part Of The Day' =
+	CASE 
+		WHEN (DATEPART(HOUR, Start)) BETWEEN 0 AND 11 THEN 'Morning'
+		WHEN (DATEPART(HOUR, Start)) BETWEEN 12 AND 17  THEN 'Afternoon'
+		WHEN (DATEPART(HOUR, Start)) BETWEEN 18 AND 23  THEN 'Evening'
+	END,
+	Duration = 
+	CASE 
+		WHEN Duration <= 3 THEN 'Extra Short'
+		WHEN Duration >= 4 AND Duration <=6 THEN 'Short'
+		WHEN Duration > 6 THEN 'Long'
+		WHEN Duration IS NULL THEN 'Extra Long'
+	END
+FROM Games
+ORDER BY Game, Duration, 'Part Of The Day'
 
