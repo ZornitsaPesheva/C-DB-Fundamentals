@@ -84,3 +84,8 @@ SELECT Name AS Game, 'Part Of The Day' =
 FROM Games
 ORDER BY Game, Duration, 'Part Of The Day'
 
+--16
+SELECT ProductName, OrderDate, 
+DATEADD(Day, 3, OrderDate) AS 'Pay Due',
+DATEADD(Month, 1, OrderDate) AS 'Deliver Due'
+FROM Orders
