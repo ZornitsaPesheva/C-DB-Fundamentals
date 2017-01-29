@@ -44,28 +44,21 @@ GROUP BY [DepositGroup], [MagicWandCreator]
 ORDER BY [MagicWandCreator], [DepositGroup]
 
 --9 
-SELECT AgeGroup =
-	CASE
-		WHEN Age BETWEEN 0 AND 10 THEN '[0-10]'
-		WHEN Age BETWEEN 11 AND 20 THEN '[11-20]'
-		WHEN Age BETWEEN 21 AND 30 THEN '[21-30]'
-		WHEN Age BETWEEN 31 AND 40 THEN '[31-40]'
-		WHEN Age BETWEEN 41 AND 50 THEN '[41-50]'
-		WHEN Age BETWEEN 51 AND 60 THEN '[51-60]'
-		ELSE '[61+]'
-	END, 
-	COUNT(*) AS WizardCount
-FROM WizzardDeposits
-GROUP BY 
-	CASE
-		WHEN Age BETWEEN 0 AND 10 THEN '[0-10]'
-		WHEN Age BETWEEN 11 AND 20 THEN '[11-20]'
-		WHEN Age BETWEEN 21 AND 30 THEN '[21-30]'
-		WHEN Age BETWEEN 31 AND 40 THEN '[31-40]'
-		WHEN Age BETWEEN 41 AND 50 THEN '[41-50]'
-		WHEN Age BETWEEN 51 AND 60 THEN '[51-60]'
-		ELSE '[61+]'
-	END
+SELECT AG.AgeGroup, COUNT(AG.Age)
+FROM
+	(SELECT
+		CASE
+			WHEN Age BETWEEN 0 AND 10 THEN '[0-10]'
+			WHEN Age BETWEEN 11 AND 20 THEN '[11-20]'
+			WHEN Age BETWEEN 21 AND 30 THEN '[21-30]'
+			WHEN Age BETWEEN 31 AND 40 THEN '[31-40]'
+			WHEN Age BETWEEN 41 AND 50 THEN '[41-50]'
+			WHEN Age BETWEEN 51 AND 60 THEN '[51-60]'
+			ELSE '[61+]'
+		END AgeGroup, Age
+	FROM [WizzardDeposits]
+	)AG
+GROUP BY AG.AgeGroup
 
 --10
 SELECT LEFT(FirstName, 1) AS FirstLetter FROM WizzardDeposits
@@ -80,5 +73,6 @@ GROUP BY DepositGroup, IsDepositExpired
 ORDER BY DepositGroup DESC, IsDepositExpired
 
 --12
+
 
 
