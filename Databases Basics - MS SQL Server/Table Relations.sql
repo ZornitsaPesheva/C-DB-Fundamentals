@@ -227,3 +227,14 @@ CONSTRAINT FK_Agenda_Students FOREIGN KEY (StudentID)
 CONSTRAINT FK_Agenda_Subjects FOREIGN KEY (SubjectID)
 	REFERENCES Subjects(SubjectID)
 )
+
+-- 09. *Peaks in Rila
+
+SELECT Mountains.MountainRange, Peaks.PeakName, Peaks.Elevation
+FROM Mountains
+RIGHT JOIN Peaks
+ON Mountains.ID = Peaks.MountainID
+WHERE Mountains.ID = 17
+ORDER BY Peaks.Elevation DESC
+
+
