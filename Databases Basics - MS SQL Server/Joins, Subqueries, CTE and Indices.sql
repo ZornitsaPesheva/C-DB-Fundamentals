@@ -85,4 +85,34 @@ WHERE e1.ManagerID IN (3, 7)
 ORDER BY e1.EmployeeID
 
 -- 10. Employees Summary
- 
+SELECT TOP 50 
+	e1.EmployeeID, e1.FirstName + ' ' + e1.LastName AS EmployeeName,
+	e2.FirstName + ' ' + e2.LastName AS ManagerName,
+	d.Name AS DepartmentName
+FROM Employees e1
+JOIN Employees e2
+ON e1.ManagerID = e2.EmployeeID
+JOIN Departments d
+ON e1.DepartmentID = d.DepartmentID
+ORDER BY e1.EmployeeID
+
+-- 11. Min Average Salary
+SELECT MIN(a.Salary) AS MinAverageSalary FROM 
+	(SELECT e.DepartmentID, AVG(e.Salary) AS Salary
+	FROM Employees e
+	GROUP BY e.DepartmentID) a
+
+-- 12. Highest Peaks in Bulgaria
+SELECT mc.CountryCode, m.MountainRange, 
+	p.PeakName, p.Elevation
+FROM MountainsCountries mc
+JOIN Mountains m
+ON mc.MountainId = m.Id
+RIGHT JOIN Peaks p
+ON p.MountainId = m.Id
+WHERE mc.CountryCode = 'BG'
+	AND p.Elevation > 2835
+ORDER BY p.Elevation DESC
+
+-- 13. Count Mountain Ranges
+
