@@ -124,5 +124,24 @@ GROUP BY mc.CountryCode
 HAVING mc.CountryCode IN ('US', 'RU', 'BG')
 
 -- 14. Countries With or Without Rivers
+SELECT TOP 5 c.CountryName, r.RiverName
+FROM Countries c
+LEFT JOIN CountriesRivers cr
+ON cr.CountryCode = c.CountryCode
+LEFT JOIN Rivers r
+ON r.Id = cr.RiverId
+WHERE c.ContinentCode = 'AF'
+ORDER BY c.CountryName
+
+-- 15. Continents and Currencies
+SELECT -- още не мога да го измисля
+	(SELECT ccc.ContinentCode, MAX(ccc.cnt) AS CurrencyUsage FROM
+		(SELECT ContinentCode, CurrencyCode, COUNT(CurrencyCode) AS cnt
+		FROM Countries 
+	GROUP BY ContinentCode, CurrencyCode) ccc
+	GROUP BY ccc.ContinentCode
+	ORDER BY ccc.ContinentCode) AS c1
+
+
 
 
