@@ -115,4 +115,14 @@ WHERE mc.CountryCode = 'BG'
 ORDER BY p.Elevation DESC
 
 -- 13. Count Mountain Ranges
+SELECT mc.CountryCode, 
+	COUNT(m.MountainRange) AS MountainRanges 
+FROM MountainsCountries mc
+JOIN Mountains m
+ON mc.MountainId = m.Id
+GROUP BY mc.CountryCode
+HAVING mc.CountryCode IN ('US', 'RU', 'BG')
+
+-- 14. Countries With or Without Rivers
+
 
