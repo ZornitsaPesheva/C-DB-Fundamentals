@@ -177,8 +177,8 @@ GROUP BY c.CountryName
 ORDER BY HighestPeakElevation DESC, 
 	LongestRiverLength DESC, c.CountryName
 
--- 18. Highest Peak Name and Elevation by Country (doesn't work)
-SELECT 
+-- 18. Highest Peak Name and Elevation by Country
+SELECT TOP 5
 	c.CountryName AS Country,
 	ISNULL(p.PeakName, '(no highest peak)') AS HighestPeakName,
 	ISNULL(MAX(p.Elevation), 0) AS HighestPeakElevation,
