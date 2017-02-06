@@ -31,3 +31,34 @@ END
 EXEC usp_GetTownsStartingWith b
 
 -- 04. Employees from Town
+CREATE PROCEDURE usp_GetEmployeesFromTown (@townName NVARCHAR(30))
+AS
+BEGIN
+	SELECT e.FirstName AS 'First Name', e.LastName AS 'Last Name'
+	FROM Employees e
+	JOIN Addresses a
+	ON e.AddressID = a.AddressID
+	JOIN Towns t
+	ON t.TownID = a.TownID
+	WHERE t.Name = @townName
+END
+
+EXEC usp_GetEmployeesFromTown Sofia
+
+-- 05. Salary Level Function
+CREATE FUNCTION ufn_GetSalaryLevel(@salary MONEY)
+RETURNS NVARCHAR(10)
+AS
+BEGIN
+	RETURN
+		CASE 
+			WHEN @salary < 30000 THEN 'Low'
+			WHEN @salary BETWEEN 30000 AND 50000 THEN 'Average'
+			WHEN @salary > 50000 THEN 'High'
+		END
+END
+
+SELECT Salary, dbo.ufn_GetSalaryLevel(Salary) AS 'Salary Level'
+FROM Employees
+
+-- 06. Employees by Salary Level
