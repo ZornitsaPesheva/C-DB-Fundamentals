@@ -197,10 +197,44 @@ CREATE PROCEDURE usp_DepositMoney (@accountId INT, @moneyAmount MONEY)
 AS
 BEGIN
 	BEGIN TRANSACTION
-	DECLARE @maxId INT = 0
+	UPDATE Accounts
 	SET Balance = Balance + @moneyAmount
 	WHERE Accounts.Id = @AccountId
 	COMMIT 
 END 
 
 EXEC usp_DepositMoney 1, 10000
+
+-- 15. Withdraw Money Procedure
+CREATE PROCEDURE usp_WithdrawMoney (@accountId INT, @moneyAmount MONEY)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	UPDATE Accounts
+	SET Balance = Balance - @moneyAmount
+	WHERE Accounts.Id = @AccountId
+	COMMIT 
+END 
+
+EXEC usp_WithdrawMoney 1, 10000
+
+-- 16. Money Transfer
+CREATE PROCEDURE usp_TransferMoney(@senderId INT, @receiverId INT, @amount MONEY)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	UPDATE Accounts
+	SET Balance = Balance - @amount
+	WHERE Accounts.Id = @senderId
+	UPDATE Accounts
+	SET Balance = Balance + @amount
+	WHERE Accounts.Id = @receiverId
+	IF (SELECT Balance FROM Accounts WHERE Accounts.Id = @senderId) < 0
+		ROLLBACK
+	ELSE COMMIT 
+END
+
+EXEC usp_TransferMoney 1, 2, 10000
+
+-- 17. Create Table Logs
+
