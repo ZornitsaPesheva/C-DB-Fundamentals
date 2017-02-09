@@ -62,3 +62,145 @@ SELECT Salary, dbo.ufn_GetSalaryLevel(Salary) AS 'Salary Level'
 FROM Employees
 
 -- 06. Employees by Salary Level
+CREATE PROCEDURE usp_EmployeesBySalaryLevel (@level NVARCHAR(10))
+AS 
+BEGIN
+	SELECT 
+		s.FirstName AS 'First Name',
+		s.LastName AS 'Last Name'
+	FROM (SELECT FirstName, LastName, Salary, 
+				dbo.ufn_GetSalaryLevel(Salary) AS sLevel
+			FROM Employees) s
+	WHERE s.sLevel = @level
+END
+ 
+EXEC usp_EmployeesBySalaryLevel Low
+
+-- 07. Define Function
+CREATE FUNCTION ufn_IsWordComprised (@setOfLetters NVARCHAR(20), @word NVARCHAR(20))
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @comprised BIT = 1
+	DECLARE @index INT = 1
+ 	WHILE (@comprised = 1) AND (@index <= len(@word))
+	BEGIN
+		IF(CHARINDEX(LOWER(SUBSTRING(@word, @index, 1)), LOWER(@setOfLetters)) NOT BETWEEN 1 AND LEN(@setOfLetters))
+			BEGIN
+				SET @comprised = 0	
+			END
+		ELSE SET @index += 1
+	END
+	RETURN @comprised
+END
+
+SELECT dbo.ufn_IsWordComprised('pppp', 'Guy')
+
+-- 08. Delete Employees and Departments
+
+BEGIN TRANSACTION 
+ALTER TABLE EmployeesProjects
+DROP CONSTRAINT FK_EmployeesProjects_Employees
+ALTER TABLE Departments
+DROP CONSTRAINT FK_Departments_Employees
+ALTER TABLE Employees
+DROP CONSTRAINT FK_Employees_Employees
+DELETE FROM Employees
+WHERE DepartmentID IN (7,8)
+DELETE FROM Departments
+WHERE DepartmentID IN (7,8)
+
+ROLLBACK
+
+-- 09. Employees with Three Projects
+CREATE PROCEDURE usp_AssignProject(@emloyeeId INT, @projectID INT)
+AS
+BEGIN
+	BEGIN TRANSACTION
+		INSERT INTO EmployeesProjects
+			(EmployeeID, ProjectID)
+		VALUES
+			(@emloyeeId, @projectID)
+		IF (SELECT COUNT(EmployeeID) FROM EmployeesProjects
+			WHERE EmployeeID = @emloyeeId) > 3
+		BEGIN
+			RAISERROR('The employee has too many projects!', 16, 1)
+			ROLLBACK
+		END
+	COMMIT
+END
+
+EXEC usp_AssignProject 1, 6
+
+-- 10. Find Full Name
+CREATE PROCEDURE usp_GetHoldersFullName
+AS
+BEGIN
+	SELECT FirstName + ' ' + LastName AS 'Full Name'
+	FROM AccountHolders
+END
+
+EXEC usp_GetHoldersFullName
+
+-- 11. People with Balance Higher Than
+CREATE PROCEDURE usp_GetHoldersWithBalanceHigherThan(@number MONEY)
+AS
+BEGIN
+	SELECT FirstName AS 'First Name', LastName AS 'Last Name' 
+	FROM (SELECT FirstName, LastName,
+				SUM(a.Balance) AS TotalBalance 
+			FROM AccountHolders AS ah
+			JOIN Accounts AS a
+			ON a.AccountHolderId = ah.Id
+			GROUP BY ah.FirstName, ah.LastName
+		) AS tb
+	WHERE tb.TotalBalance > @number
+END
+
+EXEC dbo.usp_GetHoldersWithBalanceHigherThan 2 
+
+-- 12. Future Value Function
+CREATE FUNCTION ufn_CalculateFutureValue(@sum MONEY, @yir FLOAT, @ny INT)
+RETURNS MONEY
+AS
+BEGIN
+	DECLARE @i INT = 1 
+	WHILE (@i <= @ny)
+	BEGIN
+		SET @sum = @sum + @sum*@yir
+		SET @i += 1
+	END
+	RETURN @sum
+END
+
+SELECT dbo.ufn_CalculateFutureValue(1000, 0.1, 5)
+
+-- 13. Calculating Interest
+CREATE PROCEDURE usp_CalculateFutureValueForAccount(@accId INT, @rate FLOAT)
+AS
+BEGIN
+	SELECT ah.Id AS [Account Id], 
+		ah.FirstName AS [First Name],
+		ah.LastName AS [LastName],
+		a.Balance AS [Current Balanse], 
+		dbo.ufn_CalculateFutureValue(a.Balance, @rate, 5)
+	FROM AccountHolders ah
+	RIGHT JOIN Accounts a
+	ON ah.Id = a.AccountHolderId
+	WHERE a.Id = @accId
+END
+
+EXEC usp_CalculateFutureValueForAccount 1, 0.1
+
+-- 14. Deposit Money Procedure
+CREATE PROCEDURE usp_DepositMoney (@accountId INT, @moneyAmount MONEY)
+AS
+BEGIN
+	BEGIN TRANSACTION
+	DECLARE @maxId INT = 0
+	SET Balance = Balance + @moneyAmount
+	WHERE Accounts.Id = @AccountId
+	COMMIT 
+END 
+
+EXEC usp_DepositMoney 1, 10000
