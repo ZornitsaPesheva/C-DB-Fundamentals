@@ -237,4 +237,123 @@ END
 EXEC usp_TransferMoney 1, 2, 10000
 
 -- 17. Create Table Logs
+CREATE TABLE Logs(
+LogId INT IDENTITY PRIMARY KEY,
+AccountId INT,
+OldSum MONEY,
+NewSum Money)
 
+CREATE TRIGGER tr_SumChanges ON Accounts AFTER UPDATE
+AS
+BEGIN
+	INSERT INTO Logs (AccountId, OldSum, NewSum)
+	SELECT i.Id, d.Balance, i.Balance 
+	FROM inserted AS i
+	INNER JOIN deleted AS d
+	ON i.AccountHolderId = d.AccountHolderId
+END
+
+UPDATE Accounts
+SET Balance += 10
+WHERE Id = 1
+
+-- 18. Create Table Emails
+CREATE TABLE NotificationEmails(
+Id INT IDENTITY PRIMARY KEY,
+Recipient NVARCHAR(50),
+Subject NVARCHAR(256),
+Body NVARCHAR(MAX)
+)
+
+CREATE TRIGGER tr_LogToEmail ON Logs AFTER INSERT
+AS
+BEGIN
+	INSERT INTO NotificationEmails
+		(Recipient, Subject, Body)
+	SELECT AccountId,
+		'Balance change for account: ' 
+		+ CONVERT(varchar(10), AccountId),
+		'On ' + CONVERT(varchar(30), GETDATE()) + ' your balance was changed from '
+		+ CONVERT(varchar(30), OldSum) + ' to ' 
+		+ CONVERT(varchar(30), NewSum) 
+	  FROM Logs
+END
+
+UPDATE Accounts
+SET Balance += 10
+WHERE Id = 1
+
+-- 19. *Cash in User Games Odd Rows
+CREATE FUNCTION ufn_CashInUsersGames (@gameName NVARCHAR(50))
+RETURNS @Result TABLE(
+SumCash MONEY
+)
+AS
+BEGIN
+	INSERT INTO @Result
+	SELECT SUM(sc.Cash) as SumCash
+	FROM
+		(SELECT Cash,
+		ROW_NUMBER() OVER(ORDER BY Cash DESC) AS RowNumber
+		FROM UsersGames ug
+		RIGHT JOIN Games g
+		ON ug.GameId = g.Id
+		WHERE g.Name = @gameName) sc
+	WHERE RowNumber % 2 != 0
+	RETURN
+END
+
+-- 21. *Massive Shopping
+BEGIN TRANSACTION
+DECLARE @sum1 MONEY = (SELECT SUM(i.Price)
+						FROM Items i
+						WHERE MinLevel BETWEEN 11 AND 12)
+
+IF (SELECT Cash FROM UsersGames WHERE Id = 110) < @sum1
+ROLLBACK
+ELSE BEGIN
+		UPDATE UsersGames
+		SET Cash = Cash - @sum1
+		WHERE Id = 110
+
+		INSERT INTO UserGameItems (UserGameId, ItemId)
+		SELECT 110, Id 
+		FROM Items 
+		WHERE MinLevel BETWEEN 11 AND 12
+		COMMIT
+	END
+
+BEGIN TRANSACTION
+DECLARE @sum2 MONEY = (SELECT SUM(i.Price)
+						FROM Items i
+						WHERE MinLevel BETWEEN 19 AND 21)
+
+IF (SELECT Cash FROM UsersGames WHERE Id = 110) < @sum2
+ROLLBACK
+ELSE BEGIN
+		UPDATE UsersGames
+		SET Cash = Cash - @sum2
+		WHERE Id = 110
+
+		INSERT INTO UserGameItems (UserGameId, ItemId)
+			SELECT 110, Id 
+			FROM Items 
+			WHERE MinLevel BETWEEN 19 AND 21
+		COMMIT
+	END
+
+SELECT i.Name AS 'Item Name' 
+FROM UserGameItems ugi
+JOIN Items i
+ON ugi.ItemId = i.Id
+WHERE ugi.UserGameId = 110
+
+-- 22. Number of Users for Email Provider
+
+
+
+
+
+
+	
+	
