@@ -416,14 +416,40 @@ GROUP BY u.Username, g.Name
 ORDER BY Strength DESC, Defence DESC, Speed DESC, Mind DESC, Luck DESC
 
 -- 26. All Items with Greater than Average Statistics
+SELECT i.Name, i.Price, i.MinLevel, 
+	s.Strength, s.Defence, s.Speed, s.Luck, s.Mind
+FROM Items i
+JOIN [Statistics] s
+ON i.StatisticId = s.Id
+WHERE s.Speed > (SELECT AVG(s.Speed)
+					FROM Items i
+					JOIN [Statistics] s
+					ON i.StatisticId = s.Id
+					)
+AND s.Luck > (SELECT AVG(s.Luck)
+					FROM Items i
+					JOIN [Statistics] s
+					ON i.StatisticId = s.Id
+					)
+AND s.Mind > (SELECT AVG(s.Mind)
+					FROM Items i
+					JOIN [Statistics] s
+					ON i.StatisticId = s.Id
+					)
+ORDER BY i.Name
 
+-- 27. Display All Items about Forbidden Game Type
+SELECT i.Name AS Item, i.Price, i.MinLevel,
+gt.Name AS [Forbidden Game Type]
+FROM Items i
+LEFT JOIN GameTypeForbiddenItems gtfi
+ON gtfi.ItemId = i.Id
+LEFT JOIN GameTypes gt
+ON gt.Id = gtfi.GameTypeId
+ORDER BY [Forbidden Game Type] DESC,
+i.Name
 
-
-
-
-
-
-
+-- 28. Buy Items for User in Game
 
 
 
