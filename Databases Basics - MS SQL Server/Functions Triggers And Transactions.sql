@@ -349,6 +349,79 @@ ON ugi.ItemId = i.Id
 WHERE ugi.UserGameId = 110
 
 -- 22. Number of Users for Email Provider
+SELECT SUBSTRING(Email, CHARINDEX('@', Email)+1, len(Email))  AS [Email Provider], 
+	COUNT(Email) AS [Number Of Users]
+FROM Users
+GROUP BY SUBSTRING(Email, CHARINDEX('@', Email)+1, len(Email))
+ORDER BY COUNT(Email) DESC, SUBSTRING(Email, CHARINDEX('@', Email)+1, len(Email)) 
+
+-- 23. All Users in Games
+SELECT g.Name, gt.Name AS [Game Type], 
+	u.Username, ug.Level, ug.Cash, c.Name
+FROM Games g
+JOIN GameTypes gt
+ON gt.Id = g.GameTypeId
+JOIN UsersGames ug
+ON ug.GameId = g.Id
+JOIN Users u
+ON u.Id = ug.UserId
+JOIN Characters c
+ON ug.CharacterId = c.Id
+ORDER BY ug.Level DESC, u.Username, g.Name
+
+-- 24. Users in Games with Their Items
+SELECT u.Username, g.Name AS Game, COUNT(i.Name), SUM(i.Price)
+FROM Users u
+JOIN UsersGames ug
+ON u.Id = ug.UserId
+JOIN Games g
+ON ug.GameId = g.Id
+JOIN UserGameItems ugi
+ON ugi.UserGameId = ug.Id
+JOIN Items i
+ON i.Id = ugi.ItemId
+GROUP BY u.Username, g.Name
+HAVING COUNT(i.Name) >= 10
+ORDER BY COUNT(i.Name) DESC,
+	SUM(i.Price) DESC,
+	u.Username
+
+-- 25. * User in Games with Their Statistics
+SELECT u.Username, g.Name AS Game, MAX(c.Name) AS Character,
+SUM(its.Strength) + MAX(gts.Strength) + MAX(cs.Strength) AS Strength,
+SUM(its.Defence) + MAX(gts.Defence) + MAX(cs.Defence) AS Defence,
+SUM(its.Speed) + MAX(gts.Speed) + MAX(cs.Speed) as Speed,
+SUM(its.Mind) + MAX(gts.Mind) + MAX(cs.Mind) AS Mind,
+SUM(its.Luck) + MAX(gts.Luck) + MAX(cs.Luck) AS Luck
+FROM Users u
+JOIN UsersGames ug
+ON u.Id = ug.UserId
+JOIN Games g
+ON ug.GameId = g.Id
+JOIN GameTypes gt
+ON gt.Id = g.GameTypeId
+JOIN [dbo].[Statistics] gts
+ON gts.Id = gt.BonusStatsId
+JOIN Characters c
+ON ug.CharacterId = c.Id
+JOIN [dbo].[Statistics] cs
+ON cs.Id = c.StatisticId
+JOIN UserGameItems ugi
+ON ugi.UserGameId = ug.Id
+JOIN Items i
+ON i.Id = ugi.ItemId
+JOIN [dbo].[Statistics] its
+ON its.Id = i.StatisticId
+GROUP BY u.Username, g.Name
+ORDER BY Strength DESC, Defence DESC, Speed DESC, Mind DESC, Luck DESC
+
+-- 26. All Items with Greater than Average Statistics
+
+
+
+
+
+
 
 
 
