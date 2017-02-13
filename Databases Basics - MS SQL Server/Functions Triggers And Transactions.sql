@@ -1,4 +1,4 @@
--- 01. Employees with Salary Above 35000
+﻿-- 01. Employees with Salary Above 35000
 CREATE PROCEDURE usp_GetEmployeesSalaryAbove35000
 AS
 BEGIN
@@ -450,9 +450,170 @@ ORDER BY [Forbidden Game Type] DESC,
 i.Name
 
 -- 28. Buy Items for User in Game
+DECLARE @sumCash MONEY = (SELECT SUM(Price)
+					FROM Items
+					WHERE Name IN ('Blackguard', 'Bottomless Potion of Amplification',
+					'Eye of Etlich (Diablo III)', 'Gem of Efficacious Toxin', 
+					'Golden Gorget of Leoric', 'Hellfire Amulet'))
+
+BEGIN TRAN
+IF (SELECT SUM(Cash) FROM UsersGames 
+	WHERE UserId = (SELECT Id FROM Users
+					WHERE Username = 'Alex')) < @sumCash	
+ROLLBACK
+ELSE
+	UPDATE UsersGames
+	SET Cash = Cash - @sumCash
+	WHERE UserId = (SELECT Id FROM Users
+					WHERE Username = 'Alex')
+
+	INSERT INTO UserGameItems (ItemId, UserGameId)
+	(SELECT i.Id, 235
+	FROM Items i
+	WHERE Name IN ('Blackguard', 'Bottomless Potion of Amplification',
+	'Eye of Etlich (Diablo III)', 'Gem of Efficacious Toxin', 
+	'Golden Gorget of Leoric', 'Hellfire Amulet'))
+COMMIT
+
+SELECT u.Username, g.Name, ug.Cash, i.Name AS [Item Name]
+FROM UserGameItems ugi
+JOIN Items i
+ON ugi.ItemId = i.Id
+JOIN UsersGames ug
+ON ug.Id = ugi.UserGameId
+JOIN Users u
+ON ug.UserId = u.Id
+JOIN  Games g
+ON ug.GameId = g.Id
+WHERE g.Name = 'Edinburgh'
+ORDER BY i.Name
+
+-- 29. Peaks and Mountains
+SELECT p.PeakName, m.MountainRange AS Mountain, p.Elevation
+FROM Peaks p
+JOIN Mountains m
+ON p.MountainId = m.Id 
+ORDER BY p.Elevation DESC, p.PeakName
+
+-- 30. Peaks with Mountain, Country and Continent
+SELECT p.PeakName, m.MountainRange, c.CountryName, con.ContinentName
+FROM Peaks p
+JOIN Mountains m
+ON p.MountainId = m.Id 
+JOIN MountainsCountries mc
+ON mc.MountainId = m.Id
+JOIN Countries c
+ON mc.CountryCode = c.CountryCode
+JOIN Continents con
+ON con.ContinentCode = c.ContinentCode
+ORDER BY p.PeakName, c.CountryName
+
+-- 31. Rivers by Country
+SELECT c.CountryName, con.ContinentName, 
+ISNULL(COUNT(r.Id), 0) AS RiversCount,
+ISNULL(SUM(r.Length), 0)  AS TotalLength
+FROM Countries c
+JOIN Continents con
+ON con.ContinentCode = c.ContinentCode
+LEFT JOIN CountriesRivers cr
+ON c.CountryCode = cr.CountryCode
+LEFT JOIN Rivers r
+ON cr.RiverId = r.Id
+GROUP BY c.CountryName, con.ContinentName
+ORDER BY RiversCount DESC, TotalLength DESC, c.CountryName
+
+-- 32. Count of Countries by Currency
+SELECT c.CurrencyCode, c.Description AS Currency, 
+COUNT(ctr.CountryCode) AS NumberOfCountries
+FROM Currencies c
+LEFT JOIN Countries ctr
+ON c.CurrencyCode = ctr.CurrencyCode
+GROUP BY c.CurrencyCode, c.Description
+ORDER BY NumberOfCountries DESC, c.Description
+
+-- 33. Population and Area by Continent
+SELECT cnt.ContinentName, 
+SUM(cntr.AreaInSqKm) AS CountriesArea,
+SUM(CAST (cntr.Population AS BIGINT)) AS CountriesPopulation 
+FROM Countries cntr
+JOIN Continents cnt
+ON cntr.ContinentCode = cnt.ContinentCode
+GROUP BY cnt.ContinentName
+ORDER BY CountriesPopulation DESC
+
+-- 34. Monasteries by Country
+CREATE TABLE Monasteries(
+Id INT IDENTITY PRIMARY KEY,
+Name NVARCHAR(50),
+CountryCode CHAR(2) 
+FOREIGN KEY (CountryCode) REFERENCES Countries(CountryCode)
+)
+
+INSERT INTO Monasteries(Name, CountryCode) VALUES
+('Rila Monastery “St. Ivan of Rila”', 'BG'), 
+('Bachkovo Monastery “Virgin Mary”', 'BG'),
+('Troyan Monastery “Holy Mother''s Assumption”', 'BG'),
+('Kopan Monastery', 'NP'),
+('Thrangu Tashi Yangtse Monastery', 'NP'),
+('Shechen Tennyi Dargyeling Monastery', 'NP'),
+('Benchen Monastery', 'NP'),
+('Southern Shaolin Monastery', 'CN'),
+('Dabei Monastery', 'CN'),
+('Wa Sau Toi', 'CN'),
+('Lhunshigyia Monastery', 'CN'),
+('Rakya Monastery', 'CN'),
+('Monasteries of Meteora', 'GR'),
+('The Holy Monastery of Stavronikita', 'GR'),
+('Taung Kalat Monastery', 'MM'),
+('Pa-Auk Forest Monastery', 'MM'),
+('Taktsang Palphug Monastery', 'BT'),
+('Sümela Monastery', 'TR')
+
+ALTER TABLE Countries 
+ADD IsDeleted BIT DEFAULT 0
 
 
+UPDATE Countries
+SET IsDeleted = 1
+WHERE CountryCode IN (SELECT r.CountryCode 
+						FROM (SELECT c.CountryCode, COUNT(cr.RiverId) AS CountR
+								FROM Countries c
+								JOIN CountriesRivers cr
+								ON c.CountryCode = cr.CountryCode
+								GROUP BY c.CountryCode
+								HAVING COUNT(cr.RiverId) > 3) r
+					)
+
+SELECT m.Name AS Monastery, c.CountryName AS Country
+FROM Monasteries m
+JOIN Countries c
+ON m.CountryCode = c.CountryCode
+WHERE c.IsDeleted != 1 OR c.IsDeleted IS NULL
+ORDER BY Monastery
+
+-- 35. Monasteries by Continents and Countries
+UPDATE Countries
+SET CountryName = 'Burma'
+WHERE CountryName = 'Myanmar'
+
+INSERT INTO Monasteries(Name, CountryCode)
+SELECT 'Hanga Abbey', CountryCode 
+	FROM Countries
+	WHERE CountryName = 'Tanzania'
 
 
-	
-	
+INSERT INTO Monasteries(Name, CountryCode)
+SELECT 'Myin-Tin-Daik', CountryCode 
+	FROM Countries
+	WHERE CountryName = 'Myanmar'
+
+SELECT cnt.ContinentName, cntr.CountryName, 
+COUNT(m.Id) AS MonasteriesCount
+FROM Countries cntr
+LEFT JOIN Continents cnt
+ON cnt.ContinentCode = cntr.ContinentCode
+LEFT JOIN Monasteries m
+ON cntr.CountryCode = m.CountryCode
+WHERE cntr.IsDeleted != 1 OR cntr.IsDeleted IS NULL
+GROUP BY cnt.ContinentName, cntr.CountryName
+ORDER BY MonasteriesCount DESC, cntr.CountryName
