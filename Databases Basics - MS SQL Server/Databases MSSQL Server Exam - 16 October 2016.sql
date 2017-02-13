@@ -143,4 +143,16 @@ WHERE AirlineID IN (SELECT AirlineID FROM Flights)
 ORDER BY Rating DESC, AirlineID
 
 -- Section 3: Querying - 05. All Tickets Below 5000
+SELECT t.TicketID, a.AirportName AS Destination, 
+c.FirstName + ' ' + c.LastName AS CustomerName
+FROM Tickets t
+JOIN Flights f
+ON f.FlightID = t.FlightID
+JOIN Airports a
+ON a.AirportID = f.DestinationAirportID
+JOIN Customers c
+ON c.CustomerID = t.CustomerID
+WHERE t.Price < 5000 AND t.Class = 'First'
+ORDER BY TicketID
 
+-- Section 3: Querying - 06. Customers From Home
