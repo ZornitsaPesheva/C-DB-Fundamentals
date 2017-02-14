@@ -156,3 +156,85 @@ WHERE t.Price < 5000 AND t.Class = 'First'
 ORDER BY TicketID
 
 -- Section 3: Querying - 06. Customers From Home
+SELECT c.CustomerID, 
+	c.FirstName + ' ' + c.LastName AS FulName, 
+	tn.TownName AS HomeTown
+FROM Customers c
+JOIN Tickets t
+ON t.CustomerID = c.CustomerID
+JOIN Flights f
+ON f.FlightID = t.FlightID
+JOIN Airports a
+ON a.AirportID = f.OriginAirportID
+JOIN Towns tn
+ON tn.TownID = a.TownID
+WHERE a.TownID = c.HomeTownID
+AND f.Status = 'Departing'
+
+-- Section 3: Querying - 07. Customers who will fly
+SELECT DISTINCT c.CustomerID, 
+	c.FirstName + ' ' + c.LastName AS FulName,
+	2016 - YEAR(c.DateOfBirth) AS Age
+FROM Customers c
+JOIN Tickets t
+ON t.CustomerID = c.CustomerID
+JOIN Flights f
+ON t.FlightID = f.FlightID
+WHERE f.Status = 'Departing'
+ORDER BY Age, c.CustomerID
+
+-- Section 3: Querying - 08. Top 3 Customers Delayed
+SELECT TOP 3 c.CustomerID, 
+	c.FirstName + ' ' + c.LastName AS FulName,
+	t.Price, a.AirportName AS Destination
+FROM Customers c
+JOIN Tickets t
+ON t.CustomerID = c.CustomerID
+JOIN Flights f
+ON f.FlightID = t.FlightID
+JOIN Airports a
+ON a.AirportID = f.DestinationAirportID
+WHERE f.Status = 'Delayed'
+ORDER BY t.Price DESC, c.CustomerID
+
+-- Section 3: Querying - 09. Last 5 Departing Flights
+SELECT fl.FlightID, fl.DepartureTime, fl.ArrivalTime,
+	ao.AirportName AS Origin, ad.AirportName AS Destination
+FROM (SELECT TOP 5 * FROM Flights
+				WHERE Status = 'Departing'
+				ORDER BY DepartureTime DESC) AS fl
+JOIN Airports ao
+ON ao.AirportID = fl.OriginAirportID
+JOIN Airports ad
+ON ad.AirportID = fl.DestinationAirportID
+ORDER BY fl.DepartureTime, FlightID
+
+-- Section 3: Querying - 10. Customers Below 21
+SELECT DISTINCT c.CustomerID,
+	c.FirstName + ' ' + c.LastName AS FullName,
+	2016 - YEAR(c.DateOfBirth) AS Age
+FROM Customers c
+JOIN Tickets t
+ON c.CustomerID = t.CustomerID
+JOIN Flights f
+ON f.FlightID = t.FlightID
+WHERE f.Status = 'Arrived'
+AND 2016 - YEAR(c.DateOfBirth) < 21
+ORDER BY Age DESC, c.CustomerID
+
+-- Section 3: Querying - 11. AIrports and Passengers
+SELECT a.AirportID, a.AirportName, 
+	COUNT(t.CustomerID) AS Passengers
+FROM Airports a
+JOIN Flights f
+ON f.OriginAirportID= a.AirportID
+JOIN Tickets t
+ON f.FlightID = t.FlightID
+WHERE f.Status = 'Departing'
+GROUP BY a.AirportID, a.AirportName
+
+-- Section 4: Programmibility - 01. Submit Review
+
+
+
+
