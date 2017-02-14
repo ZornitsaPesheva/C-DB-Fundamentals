@@ -234,7 +234,41 @@ WHERE f.Status = 'Departing'
 GROUP BY a.AirportID, a.AirportName
 
 -- Section 4: Programmibility - 01. Submit Review
+CREATE PROCEDURE usp_SubmitReview(@CustomerID INT, @ReviewContent VARCHAR(255),
+	@ReviewGrade INT, @AirlineName VARCHAR(30))
+AS
+BEGIN
+	BEGIN TRAN
 
+	DECLARE @Index INT 
+		IF((SELECT COUNT(*) FROM CustomerReviews) = 0)
+			SET @Index = 1
+		ELSE 
+		SET @Index = (SELECT MAX(ReviewID) FROM CustomerReviews) + 1
+		
+		DECLARE @AirlineId INT  = (SELECT AirlineID FROM Airlines WHERE AirlineName = @AirlineName)
+		
+		INSERT INTO CustomerReviews
+					(ReviewID, ReviewContent, ReviewGrade, 
+						 CustomerID, AirlineID)
+				VALUES (@Index, @ReviewContent, @ReviewGrade,
+						@CustomerID, @AirlineID)
+
+		IF NOT EXISTS(SELECT AirlineName FROM Airlines
+					WHERE AirlineName = @AirlineName)
+			BEGIN
+				RAISERROR('Airline does not exist.', 16, 1)
+				ROLLBACK
+			END
+		ELSE
+			BEGIN 
+				COMMIT
+			END
+END 
+
+EXEC usp_SubmitReview 'nqkakvo review 1',1, 20, 'Royal Airline'
+
+-- Section 4: Programmibility - 02. Ticket Purchase
 
 
 
