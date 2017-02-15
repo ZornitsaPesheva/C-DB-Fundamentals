@@ -269,6 +269,59 @@ END
 EXEC usp_SubmitReview 'nqkakvo review 1',1, 20, 'Royal Airline'
 
 -- Section 4: Programmibility - 02. Ticket Purchase
+CREATE PROCEDURE usp_PurchaseTicket(@CustomerID INT, @FlightID INT, 
+	@TicketPrice DECIMAL(8, 2), @Class VARCHAR(5), @Seat VARCHAR(5))
+AS
+BEGIN
+	DECLARE @Index INT 
+		IF((SELECT COUNT(*) FROM Tickets) = 0)
+			SET @Index = 1
+		ELSE SET @Index = (SELECT MAX(TicketID) FROM Tickets) + 1	
+	BEGIN TRANSACTION
+			DECLARE @CustomerBallance DECIMAL(10, 2) = 
+				(SELECT Balance FROM CustomerBankAccounts
+				WHERE CustomerID = @CustomerID) 
+			IF(@customerBallance IS NULL)
+			SET @customerBallance = 0
+			IF(@TicketPrice > @customerBallance)
+				BEGIN
+					RAISERROR('Insufficient bank account balance for ticket purchase.', 16, 1)
+					ROLLBACK
+				END
+	ELSE BEGIN
+			INSERT INTO Tickets (TicketID, Price, Class, Seat,
+				CustomerID, FlightID)
+			VALUES
+				(@Index, @TicketPrice, @Class, @Seat,
+				@CustomerID, @FlightID)
+			UPDATE CustomerBankAccounts 
+			SET Balance = Balance - @TicketPrice
+			WHERE CustomerID = @CustomerID
+			COMMIT
+		END
+END
 
+-- BONUS Section 5: Update Trigger
+CREATE TABLE ArrivedFlights(
+FlightID INT PRIMARY KEY,
+ArrivalTime DATETIME NOT NULL,
+Origin VARCHAR(50) NOT NULL,
+Destination VARCHAR(50) NOT NULL,
+Passengers INT NOT NULL
+)
 
-
+CREATE TRIGGER tr_ArrivedFlights ON Flights FOR UPDATE
+AS
+INSERT INTO ArrivedFlights ([FlightID], [ArrivalTime],
+	[Origin], [Destination], [Passengers])
+	SELECT FlightID, ArrivalTime, 
+	orig.AirportName AS OriginAirport,
+	dest.AirportNAme AS DestinationAirport,
+	(SELECT COUNT(*) FROM Tickets WHERE FlightID = i.FlightID)
+	As Passengers
+	FROM inserted i
+	JOIN Airports orig
+	ON orig.AirportID = i.OriginAirportID
+	JOIN Airports as dest
+	ON dest.AirportID = i.DestinationAirportID
+	WHERE Status = 'Arrived'
