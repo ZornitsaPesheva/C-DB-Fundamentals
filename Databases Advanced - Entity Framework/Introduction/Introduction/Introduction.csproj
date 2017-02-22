@@ -53,6 +53,7 @@
   <ItemGroup>
     <Content Include="AddMinion1.sql" />
     <Content Include="AddMinion.sql" />
+    <Content Include="ChangeTownNames.sql" />
     <Content Include="FindMinions.sql" />
     <Content Include="Setup.sql" />
     <Content Include="VillainNameById.sql" />

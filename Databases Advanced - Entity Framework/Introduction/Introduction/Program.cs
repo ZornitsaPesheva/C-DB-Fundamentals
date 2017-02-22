@@ -27,54 +27,72 @@ namespace Introduction
                 //CreateTables(createTablesCommand);
                 // ShowVillains(connection);
                 // FindMinionsByVillainId(connection);
-                Console.Write("Minion: ");
-                string[] arr = Console.ReadLine().Split(' ')
-                    .ToArray();
+                // AddMinion(connection);
+                Console.Write("Country: ");
+                string country = Console.ReadLine();
+                string changeToUpperQuery =
+                    File.ReadAllText("../../ChangeTownNames.sql");
+                SqlCommand changeToUpperCommand =
+                    new SqlCommand(changeToUpperQuery, connection);
+                SqlParameter countryName =
+                    new SqlParameter("@countryName", country);
+                changeToUpperCommand.Parameters.Add(countryName);
+                Console.WriteLine(changeToUpperCommand.ExecuteNonQuery());
+                Console.WriteLine("The town names were affected.");
+            }
+        }
 
-                Console.Write("Villain: ");
-                string villain = Console.ReadLine();
+        private static void AddMinion(SqlConnection connection)
+        {
+            Console.Write("Minion: ");
+            string[] arr = Console.ReadLine().Split(' ')
+                .ToArray();
 
-                string isTownExist = "USE MinionsDB SELECT * FROM Towns WHERE Name = @town";
-                SqlCommand isTownExistComand = new SqlCommand(isTownExist, connection);
-                SqlParameter town = new SqlParameter("@town", arr[2]);
-                isTownExistComand.Parameters.Add(town);
+            Console.Write("Villain: ");
+            string villain = Console.ReadLine();
 
-                SqlDataReader reader = isTownExistComand.ExecuteReader();
-                if (!reader.Read())
+            string isTownExist = "USE MinionsDB SELECT * FROM Towns WHERE Name = @town";
+            SqlCommand isTownExistComand = new SqlCommand(isTownExist, connection);
+            SqlParameter town = new SqlParameter("@town", arr[2]);
+            isTownExistComand.Parameters.Add(town);
+
+            SqlDataReader reader = isTownExistComand.ExecuteReader();
+            if (!reader.Read())
+            {
+                Console.Write("Country: ");
+                string countryName = Console.ReadLine();
+
+                string addMinionQuery = File.ReadAllText("../../AddMinion1.sql");
+                SqlCommand addMinionComand = new SqlCommand(addMinionQuery, connection);
+
+                addMinionComand.Parameters.AddRange(new[]
                 {
-                    Console.Write("Country: ");
-                    string countryName = Console.ReadLine();
-
-                    string addMinionQuery = File.ReadAllText("../../AddMinion1.sql");
-                    SqlCommand addMinionComand = new SqlCommand(addMinionQuery, connection);
-
-                    addMinionComand.Parameters.AddRange(new[]
-                    {
                         new SqlParameter("@name", arr[0]),
                         new SqlParameter("@age", int.Parse(arr[1])),
                         new SqlParameter("@town", arr[2]),
                         new SqlParameter("@villain", villain),
                         new SqlParameter("@country", countryName)
                     });
-                    reader.Close();
-                    Console.WriteLine(addMinionComand.ExecuteNonQuery());
+                reader.Close();
+                Console.WriteLine(addMinionComand.ExecuteNonQuery());
+                Console.WriteLine($"{arr[0]} and {arr[2]} ware added");
 
-                }
-                else
+            }
+            else
+            {
+                string addMinionQuery = File.ReadAllText("../../AddMinion.sql");
+                SqlCommand addMinionComand = new SqlCommand(addMinionQuery, connection);
+
+                addMinionComand.Parameters.AddRange(new[]
                 {
-                    string addMinionQuery = File.ReadAllText("../../AddMinion.sql");
-                    SqlCommand addMinionComand = new SqlCommand(addMinionQuery, connection);
-
-                    addMinionComand.Parameters.AddRange(new[]
-                    {
                         new SqlParameter("@name", arr[0]),
                         new SqlParameter("@age", int.Parse(arr[1])),
                         new SqlParameter("@town", arr[2]),
                         new SqlParameter("@villain", villain)
                     });
-                    reader.Close();
-                    Console.WriteLine(addMinionComand.ExecuteNonQuery());
-                }
+                reader.Close();
+                Console.WriteLine(addMinionComand.ExecuteNonQuery());
+                Console.WriteLine($"{arr[0]} was added");
             }
         }
 
