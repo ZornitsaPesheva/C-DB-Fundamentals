@@ -37,8 +37,23 @@ namespace Introduction
                 SqlParameter countryName =
                     new SqlParameter("@countryName", country);
                 changeToUpperCommand.Parameters.Add(countryName);
-                Console.WriteLine(changeToUpperCommand.ExecuteNonQuery());
-                Console.WriteLine("The town names were affected.");
+
+                SqlDataReader reader = changeToUpperCommand.ExecuteReader();
+                int count = 0;
+                List<string> townsList = new List<string>();
+                using (reader)
+                {
+                    while (reader.Read())
+                    {
+                        count++;
+                        townsList.Add(reader[0].ToString());
+                    }
+                }
+                Console.Write(changeToUpperCommand.ExecuteNonQuery());
+                Console.WriteLine(" town names were affected.");
+                Console.WriteLine($"[{String.Join(", ", townsList)}]");
+
+
             }
         }
 
