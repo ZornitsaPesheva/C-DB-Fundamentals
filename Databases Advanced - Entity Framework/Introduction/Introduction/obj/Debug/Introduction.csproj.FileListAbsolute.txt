@@ -1,0 +1,6 @@
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\bin\Debug\Introduction.exe.config
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\bin\Debug\Introduction.exe
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\bin\Debug\Introduction.pdb
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\obj\Debug\Introduction.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\obj\Debug\Introduction.exe
+C:\Users\zorry\Documents\DBAdvanced\Introduction\Introduction\obj\Debug\Introduction.pdb
