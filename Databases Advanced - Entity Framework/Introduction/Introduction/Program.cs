@@ -12,7 +12,7 @@ namespace Introduction
     {
         static void Main(string[] args)
         {
-            
+
             SqlConnection connection =
                 new SqlConnection(@"Server=(LocalDb)\MSSQLLocalDB;Integrated Security=true;");
 
@@ -49,14 +49,19 @@ namespace Introduction
                         townsList.Add(reader[0].ToString());
                     }
                 }
+
                 Console.Write(changeToUpperCommand.ExecuteNonQuery());
-                Console.WriteLine(" town names were affected.");
-                Console.WriteLine($"[{String.Join(", ", townsList)}]");
-
-
+                if (count > 0)
+                {
+                    Console.WriteLine(" town names were affected.");
+                    Console.WriteLine($"[{String.Join(", ", townsList)}]");
+                }
+                else
+                {
+                    Console.WriteLine("No town names were affected.");
+                }
             }
         }
-
         private static void AddMinion(SqlConnection connection)
         {
             Console.Write("Minion: ");
