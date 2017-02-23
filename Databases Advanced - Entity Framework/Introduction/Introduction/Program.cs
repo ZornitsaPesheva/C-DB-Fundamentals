@@ -25,43 +25,67 @@ namespace Introduction
             {
                 // createDBCommand.ExecuteNonQuery();
                 //CreateTables(createTablesCommand);
-                // ShowVillains(connection);
-                // FindMinionsByVillainId(connection);
-                // AddMinion(connection);
-                Console.Write("Country: ");
-                string country = Console.ReadLine();
-                string changeToUpperQuery =
-                    File.ReadAllText("../../ChangeTownNames.sql");
-                SqlCommand changeToUpperCommand =
-                    new SqlCommand(changeToUpperQuery, connection);
-                SqlParameter countryName =
-                    new SqlParameter("@countryName", country);
-                changeToUpperCommand.Parameters.Add(countryName);
 
-                SqlDataReader reader = changeToUpperCommand.ExecuteReader();
-                int count = 0;
-                List<string> townsList = new List<string>();
-                using (reader)
+                Console.WriteLine("Select option:");
+                Console.WriteLine("2.Show Villains");
+                Console.WriteLine("3.Find Minions By Villain Id");
+                Console.WriteLine("4.Add Minion");
+                Console.WriteLine("5.Towns To Upper Case");
+                var option = int.Parse(Console.ReadLine());
+                switch (option)
                 {
-                    while (reader.Read())
-                    {
-                        count++;
-                        townsList.Add(reader[0].ToString());
-                    }
+                    case 2: ShowVillains(connection); break;
+                    case 3: FindMinionsByVillainId(connection); break;
+                    case 4: AddMinion(connection); break;
+                    case 5: TownsToUpperCase(connection); break;
+
+                    default: break;
                 }
 
-                Console.Write(changeToUpperCommand.ExecuteNonQuery());
-                if (count > 0)
-                {
-                    Console.WriteLine(" town names were affected.");
-                    Console.WriteLine($"[{String.Join(", ", townsList)}]");
-                }
-                else
-                {
-                    Console.WriteLine("No town names were affected.");
-                }
+
+                //string queryCountNames = "USE MinionsDB SELECT COUNT(*) FROM Minions";
+                //SqlCommand printMinionNames =
+                //    new SqlCommand(queryCountNames, connection);
+
             }
         }
+
+        private static void TownsToUpperCase(SqlConnection connection)
+        {
+            Console.Write("Country: ");
+            string country = Console.ReadLine();
+            string changeToUpperQuery =
+                File.ReadAllText("../../ChangeTownNames.sql");
+            SqlCommand changeToUpperCommand =
+                new SqlCommand(changeToUpperQuery, connection);
+            SqlParameter countryName =
+                new SqlParameter("@countryName", country);
+            changeToUpperCommand.Parameters.Add(countryName);
+
+            SqlDataReader reader = changeToUpperCommand.ExecuteReader();
+            int count = 0;
+            List<string> townsList = new List<string>();
+            using (reader)
+            {
+                while (reader.Read())
+                {
+                    count++;
+                    townsList.Add(reader[0].ToString());
+                }
+            }
+
+            Console.Write(changeToUpperCommand.ExecuteNonQuery());
+            if (count > 0)
+            {
+                Console.WriteLine(" town names were affected.");
+                Console.WriteLine($"[{String.Join(", ", townsList)}]");
+            }
+            else
+            {
+                Console.WriteLine("No town names were affected.");
+            }
+        }
+
         private static void AddMinion(SqlConnection connection)
         {
             Console.Write("Minion: ");
