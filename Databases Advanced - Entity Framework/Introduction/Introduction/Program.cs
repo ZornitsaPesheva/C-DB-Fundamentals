@@ -31,6 +31,7 @@ namespace Introduction
                 Console.WriteLine("3.Find Minions By Villain Id");
                 Console.WriteLine("4.Add Minion");
                 Console.WriteLine("5.Towns To Upper Case");
+                Console.WriteLine("7.Print All Minion Names");
                 var option = int.Parse(Console.ReadLine());
                 switch (option)
                 {
@@ -38,15 +39,47 @@ namespace Introduction
                     case 3: FindMinionsByVillainId(connection); break;
                     case 4: AddMinion(connection); break;
                     case 5: TownsToUpperCase(connection); break;
+                    case 7: PrintAllMinionNames(connection); break;
 
                     default: break;
                 }
 
+                
+            }
+        }
 
-                //string queryCountNames = "USE MinionsDB SELECT COUNT(*) FROM Minions";
-                //SqlCommand printMinionNames =
-                //    new SqlCommand(queryCountNames, connection);
-
+        private static void PrintAllMinionNames(SqlConnection connection)
+        {
+            string queryCountNames = "USE MinionsDB SELECT COUNT(*) AS Count FROM Minions";
+            SqlCommand printMinionNames =
+                new SqlCommand(queryCountNames, connection);
+            SqlDataReader reader = printMinionNames.ExecuteReader();
+            int last = 0;
+            if (reader.Read())
+            {
+                last = (int)reader["Count"];
+            }
+            reader.Close();
+            string queryAllNames = "USE MinionsDB SELECT Name FROM Minions";
+            SqlCommand printAllMinionNames =
+                new SqlCommand(queryAllNames, connection);
+            SqlDataReader readerNames = printAllMinionNames.ExecuteReader();
+            List<string> list = new List<string>();
+            while (readerNames.Read())
+            {
+                list.Add((string)readerNames["Name"]);
+            }
+            while (list.LongCount() > 0)
+            {
+                Console.WriteLine(list.First());
+                list.RemoveAt(0);
+                if (list.LongCount() > 0)
+                {
+                    Console.WriteLine(list.Last());
+                    list.RemoveAt(last - 2);
+                    last--;
+                }
+                last--;
             }
         }
 
