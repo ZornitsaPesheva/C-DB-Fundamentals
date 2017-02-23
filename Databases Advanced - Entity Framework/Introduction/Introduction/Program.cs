@@ -26,13 +26,13 @@ namespace Introduction
                 // createDBCommand.ExecuteNonQuery();
                 //CreateTables(createTablesCommand);
 
-                Console.WriteLine("Select option:");
-                Console.WriteLine("2.Show Villains");
-                Console.WriteLine("3.Find Minions By Villain Id");
-                Console.WriteLine("4.Add Minion");
-                Console.WriteLine("5.Towns To Upper Case");
-                Console.WriteLine("7.Print All Minion Names");
-                Console.WriteLine("8.Increase Minions Age");
+                Console.WriteLine("Select an option:");
+                Console.WriteLine("2. Show Villains");
+                Console.WriteLine("3. Find Minions By Villain Id");
+                Console.WriteLine("4. Add Minion");
+                Console.WriteLine("5. Towns To Upper Case");
+                Console.WriteLine("7. Print All Minion Names");
+                Console.WriteLine("8. Increase Minions Age");
                 var option = int.Parse(Console.ReadLine());
                 switch (option)
                 {
@@ -61,7 +61,12 @@ namespace Introduction
             SqlParameter param1 =
                 new SqlParameter("@idsParam", idsParam);
             increaseAgeCommand.Parameters.Add(param1);
-            Console.WriteLine(increaseAgeCommand.ExecuteNonQuery());
+          //  Console.WriteLine(increaseAgeCommand.ExecuteNonQuery());
+            SqlDataReader reader = increaseAgeCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine($"{(string)reader["Name"]} {(int)reader["Age"]}");
+            }
         }
 
         private static void PrintAllMinionNames(SqlConnection connection)

@@ -10,3 +10,5 @@ WHERE charindex(',' + CAST(Minions.Id as nvarchar(20)) + ',', @idsParamList) > 0
 --UPDATE Minions
 --SET Name = UPPER(LEFT(Name, 1) + ...) // ???
 --WHERE charindex(',' + CAST(Minions.Id as nvarchar(20)) + ',', @idsParamList) > 0
+
+SELECT Name, Age FROM Minions
