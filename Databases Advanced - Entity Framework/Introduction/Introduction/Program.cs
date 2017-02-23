@@ -32,6 +32,7 @@ namespace Introduction
                 Console.WriteLine("4.Add Minion");
                 Console.WriteLine("5.Towns To Upper Case");
                 Console.WriteLine("7.Print All Minion Names");
+                Console.WriteLine("8.Increase Minions Age");
                 var option = int.Parse(Console.ReadLine());
                 switch (option)
                 {
@@ -40,12 +41,27 @@ namespace Introduction
                     case 4: AddMinion(connection); break;
                     case 5: TownsToUpperCase(connection); break;
                     case 7: PrintAllMinionNames(connection); break;
-
+                    case 8: IncreaseAge(connection); break;
                     default: break;
-                }
-
-                
+                }           
             }
+        }
+
+        private static void IncreaseAge(SqlConnection connection)
+        {
+            Console.WriteLine("Enter the minion IDs separated by space:");
+            int[] ids = Console.ReadLine().Split(' ')
+                .Select(int.Parse).ToArray();
+            string idsParam = String.Join(",", ids);
+         
+            string increaseAge =
+                File.ReadAllText("../../IncreaseMinionsAge.sql");
+            SqlCommand increaseAgeCommand =
+                new SqlCommand(increaseAge, connection);
+            SqlParameter param1 =
+                new SqlParameter("@idsParam", idsParam);
+            increaseAgeCommand.Parameters.Add(param1);
+            Console.WriteLine(increaseAgeCommand.ExecuteNonQuery());
         }
 
         private static void PrintAllMinionNames(SqlConnection connection)
