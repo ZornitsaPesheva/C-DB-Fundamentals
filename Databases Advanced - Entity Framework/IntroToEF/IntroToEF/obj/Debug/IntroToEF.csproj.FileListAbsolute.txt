@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\IntroToEF.exe.config
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\obj\Debug\IntroToEF.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\IntroToEF.exe
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\IntroToEF.pdb
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\obj\Debug\IntroToEF.exe
+C:\Users\zorry\Documents\DBAdvanced\IntroToEF\IntroToEF\obj\Debug\IntroToEF.pdb
