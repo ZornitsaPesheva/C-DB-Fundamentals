@@ -16,6 +16,7 @@ namespace IntroToEF
             Console.WriteLine("3. Employees full information");
             Console.WriteLine("4. Employees with Salary Over 50 000");
             Console.WriteLine("5. Employees from Seattle");
+            Console.WriteLine("6. Adding a New Address and Updating Employee");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -26,6 +27,32 @@ namespace IntroToEF
                 case 4: EmployeeWithSalaryOver50000(context); break;
                 case 5: EmployeesFromSeattle(context); break;
                 default: break;
+            }
+
+            Address addr = new Address()
+            {
+                AddressText = "Vitoshka 15",
+                TownID = 4
+            };
+
+            Employee employee = null;
+            employee = context.Employees
+                .Where(e => e.LastName == "Nakov")
+                .FirstOrDefault();
+
+            employee.Address = addr;
+
+            context.SaveChanges();
+
+            List<string> employeesAddr = context.Employees
+                .OrderByDescending(e => e.AddressID)
+                .Take(10)
+                .Select(e => e.Address.AddressText)
+                .ToList();
+
+            foreach (string ea in employeesAddr)
+            {
+                Console.WriteLine(ea);
             }
         }
 
