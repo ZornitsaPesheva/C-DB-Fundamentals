@@ -26,9 +26,14 @@ namespace IntroToEF
                 case 3: EmployeeFullInfo(context); break;
                 case 4: EmployeeWithSalaryOver50000(context); break;
                 case 5: EmployeesFromSeattle(context); break;
+                case 6: AddingNewAddress(context); break;
                 default: break;
             }
+          
+        }
 
+        private static void AddingNewAddress(SoftuniContext context)
+        {
             Address addr = new Address()
             {
                 AddressText = "Vitoshka 15",
