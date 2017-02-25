@@ -22,6 +22,7 @@ namespace IntroToEF
             Console.WriteLine("8. Addresses by town name");
             Console.WriteLine("9. Employee with id 147");
             Console.WriteLine("10. Departments with more than 5 employees");
+            Console.WriteLine("11. Find Latest 10 Projects");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -36,10 +37,26 @@ namespace IntroToEF
                 case 8: AddressByTownName(context); break;
                 case 9: EmployeeWithId147(context); break;
                 case 10: DepartmentsWithMoreThan5Employees(context); break;
+                case 11: FindLatest10Projects(context); break;
                 default: break;
             }
-
             
+        }
+
+        private static void FindLatest10Projects(SoftuniContext context)
+        {
+            List<Project> projects = context.Projects
+                .OrderByDescending(p => p.StartDate)
+                .Take(10)
+                .OrderBy(p => p.Name)
+                .ToList();
+
+            foreach (Project p in projects)
+            {
+                Console.WriteLine($"{p.Name} " +
+                    $"{p.Description} " +
+                    $"{p.StartDate} {p.EndDate}");
+            }
         }
 
         private static void DepartmentsWithMoreThan5Employees(SoftuniContext context)
