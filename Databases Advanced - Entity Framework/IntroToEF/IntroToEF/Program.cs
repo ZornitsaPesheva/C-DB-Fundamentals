@@ -23,6 +23,7 @@ namespace IntroToEF
             Console.WriteLine("9. Employee with id 147");
             Console.WriteLine("10. Departments with more than 5 employees");
             Console.WriteLine("11. Find Latest 10 Projects");
+            Console.WriteLine("12. Increase Salaries");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -38,9 +39,32 @@ namespace IntroToEF
                 case 9: EmployeeWithId147(context); break;
                 case 10: DepartmentsWithMoreThan5Employees(context); break;
                 case 11: FindLatest10Projects(context); break;
+                case 12: IncreaseSalaries(context); break;
                 default: break;
             }
-            
+        }
+
+        private static void IncreaseSalaries(SoftuniContext context)
+        {
+            List<Employee> employees = context.Employees
+                .Where(e => e.Department.Name == "Engineering"
+                    || e.Department.Name == "Tool Design"
+                    || e.Department.Name == "Marketing"
+                    || e.Department.Name == "Information Services")
+                .ToList();
+
+            foreach (Employee e in employees)
+            {
+                e.Salary = e.Salary + e.Salary * 12 / 100;
+            }
+
+            context.SaveChanges();
+
+            foreach (Employee e in employees)
+            {
+                Console.WriteLine($"{e.FirstName} " +
+                    $"{e.LastName} (${e.Salary:f6})");
+            }
         }
 
         private static void FindLatest10Projects(SoftuniContext context)
