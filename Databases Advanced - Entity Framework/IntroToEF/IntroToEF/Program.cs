@@ -21,6 +21,7 @@ namespace IntroToEF
             Console.WriteLine("7. Find employees in period");
             Console.WriteLine("8. Addresses by town name");
             Console.WriteLine("9. Employee with id 147");
+            Console.WriteLine("10. Departments with more than 5 employees");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -34,10 +35,31 @@ namespace IntroToEF
                 case 7: FindEmployeesInPeriod(context); break;
                 case 8: AddressByTownName(context); break;
                 case 9: EmployeeWithId147(context); break;
+                case 10: DepartmentsWithMoreThan5Employees(context); break;
                 default: break;
             }
 
             
+        }
+
+        private static void DepartmentsWithMoreThan5Employees(SoftuniContext context)
+        {
+            List<Department> deps = context.Departments
+                .Where(d => d.Employees.Count > 5)
+                .OrderBy(d => d.Employees.Count)
+                .ToList();
+
+            foreach (Department d in deps)
+            {
+                Console.WriteLine($"{d.Name} " +
+                $"{d.Manager.FirstName}");
+
+                foreach (Employee e in d.Employees)
+                {
+                    Console.WriteLine($"{e.FirstName} " +
+                        $"{e.LastName} {e.JobTitle}");
+                }
+            }
         }
 
         private static void EmployeeWithId147(SoftuniContext context)
