@@ -55,6 +55,7 @@
     <Content Include="AddMinion.sql" />
     <Content Include="ChangeTownNames.sql" />
     <Content Include="FindMinions.sql" />
+    <Content Include="IncreaseAge.sql" />
     <Content Include="IncreaseMinionsAge.sql" />
     <Content Include="Setup.sql" />
     <Content Include="VillainNameById.sql" />

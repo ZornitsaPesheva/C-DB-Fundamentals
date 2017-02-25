@@ -33,6 +33,7 @@ namespace Introduction
                 Console.WriteLine("5. Towns To Upper Case");
                 Console.WriteLine("7. Print All Minion Names");
                 Console.WriteLine("8. Increase Minions Age");
+                Console.WriteLine("9. Increase Age Stored Procedure");
                 var option = int.Parse(Console.ReadLine());
                 switch (option)
                 {
@@ -42,8 +43,27 @@ namespace Introduction
                     case 5: TownsToUpperCase(connection); break;
                     case 7: PrintAllMinionNames(connection); break;
                     case 8: IncreaseAge(connection); break;
+                    case 9: IncreaseAgeProc(connection); break;
                     default: break;
-                }           
+                }
+            }
+        }
+
+        private static void IncreaseAgeProc(SqlConnection connection)
+        {
+            Console.Write("Enter the minion ID: ");
+            int ageParam = int.Parse(Console.ReadLine());
+            string increaseAge =
+            File.ReadAllText("../../IncreaseAge.sql");
+            SqlCommand increaseAgeCommand =
+            new SqlCommand(increaseAge, connection);
+            SqlParameter param =
+            new SqlParameter("@mid", ageParam);
+            increaseAgeCommand.Parameters.Add(param);
+            SqlDataReader reader = increaseAgeCommand.ExecuteReader();
+            if (reader.Read())
+            {
+                Console.WriteLine($"{(string)reader["Name"]} {(int)reader["Age"]}");
             }
         }
 
