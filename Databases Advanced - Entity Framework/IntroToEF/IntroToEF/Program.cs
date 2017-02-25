@@ -20,6 +20,7 @@ namespace IntroToEF
             Console.WriteLine("6. Adding a New Address and Updating Employee");
             Console.WriteLine("7. Find employees in period");
             Console.WriteLine("8. Addresses by town name");
+            Console.WriteLine("9. Employee with id 147");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -32,7 +33,32 @@ namespace IntroToEF
                 case 6: AddingNewAddress(context); break;
                 case 7: FindEmployeesInPeriod(context); break;
                 case 8: AddressByTownName(context); break;
+                case 9: EmployeeWithId147(context); break;
                 default: break;
+            }
+
+            
+        }
+
+        private static void EmployeeWithId147(SoftuniContext context)
+        {
+            Employee emp = context.Employees
+                .Where(e => e.EmployeeID == 147)
+                .FirstOrDefault();
+
+            Console.WriteLine($"{emp.FirstName} " +
+                $"{emp.LastName} {emp.JobTitle}");
+
+            List<Project> projects = new List<Project>();
+            foreach (Project p in emp.Projects)
+            {
+                projects.Add(p);
+            }
+            var projs = projects.OrderBy(p => p.Name);
+
+            foreach (Project p in projs)
+            {
+                Console.WriteLine(p.Name);
             }
         }
 
