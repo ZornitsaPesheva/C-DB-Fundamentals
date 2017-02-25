@@ -19,6 +19,7 @@ namespace IntroToEF
             Console.WriteLine("5. Employees from Seattle");
             Console.WriteLine("6. Adding a New Address and Updating Employee");
             Console.WriteLine("7. Find employees in period");
+            Console.WriteLine("8. Addresses by town name");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -30,11 +31,25 @@ namespace IntroToEF
                 case 5: EmployeesFromSeattle(context); break;
                 case 6: AddingNewAddress(context); break;
                 case 7: FindEmployeesInPeriod(context); break;
+                case 8: AddressByTownName(context); break;
                 default: break;
             }
+        }
 
-            
+        private static void AddressByTownName(SoftuniContext context)
+        {
+            List<Address> addresses = context.Addresses
+                            .OrderByDescending(a => a.Employees.Count)
+                            .ThenBy(a => a.Town.Name)
+                            .Take(10)
+                            .ToList();
 
+            foreach (Address a in addresses)
+            {
+                Console.WriteLine($"{a.AddressText}, " +
+                    $"{a.Town.Name} - " +
+                    $"{a.Employees.Count} employees");
+            }
         }
 
         private static void FindEmployeesInPeriod(SoftuniContext context)
