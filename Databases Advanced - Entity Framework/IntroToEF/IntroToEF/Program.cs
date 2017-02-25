@@ -26,6 +26,7 @@ namespace IntroToEF
             Console.WriteLine("12. Increase Salaries");
             Console.WriteLine("13. Find Employees by First Name starting with SA");
             Console.WriteLine("14. First Letter");
+            Console.WriteLine("15. Delete Project by Id");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -44,10 +45,33 @@ namespace IntroToEF
                 case 12: IncreaseSalaries(context); break;
                 case 13: FindEmployeesWhithSA(context); break;
                 case 14: FirstLetter(); break;
+                case 15: DeleteProjectById(context); break;
                 default: break;
             }
 
             
+        }
+
+        private static void DeleteProjectById(SoftuniContext context)
+        {
+            var project = context.Projects.Find(2);
+
+            foreach (Employee e in project.Employees)
+            {
+                e.Projects.Remove(project);
+            }
+
+            context.Projects.Remove(project);
+            context.SaveChanges();
+
+            List<Project> projects = context.Projects
+                .Take(10)
+                .ToList();
+
+            foreach (Project p in projects)
+            {
+                Console.WriteLine(p.Name);
+            }
         }
 
         private static void FirstLetter()
