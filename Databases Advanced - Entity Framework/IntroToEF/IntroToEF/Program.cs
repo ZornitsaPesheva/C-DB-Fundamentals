@@ -24,6 +24,7 @@ namespace IntroToEF
             Console.WriteLine("10. Departments with more than 5 employees");
             Console.WriteLine("11. Find Latest 10 Projects");
             Console.WriteLine("12. Increase Salaries");
+            Console.WriteLine("13. Find Employees by First Name starting with SA");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -40,7 +41,24 @@ namespace IntroToEF
                 case 10: DepartmentsWithMoreThan5Employees(context); break;
                 case 11: FindLatest10Projects(context); break;
                 case 12: IncreaseSalaries(context); break;
+                case 13: FindEmployeesWhithSA(context); break;
                 default: break;
+            }
+            
+
+        }
+
+        private static void FindEmployeesWhithSA(SoftuniContext context)
+        {
+            List<Employee> employees = context.Employees
+                .Where(e => e.FirstName.StartsWith("Sa")).
+                ToList();
+
+            foreach (Employee e in employees)
+            {
+                Console.WriteLine($"{e.FirstName} " +
+                    $"{e.LastName} - {e.JobTitle} - " +
+                    $"(${e.Salary:f4})");
             }
         }
 
