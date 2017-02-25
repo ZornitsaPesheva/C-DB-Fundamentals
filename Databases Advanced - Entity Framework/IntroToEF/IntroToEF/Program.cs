@@ -25,6 +25,7 @@ namespace IntroToEF
             Console.WriteLine("11. Find Latest 10 Projects");
             Console.WriteLine("12. Increase Salaries");
             Console.WriteLine("13. Find Employees by First Name starting with SA");
+            Console.WriteLine("14. First Letter");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -42,10 +43,30 @@ namespace IntroToEF
                 case 11: FindLatest10Projects(context); break;
                 case 12: IncreaseSalaries(context); break;
                 case 13: FindEmployeesWhithSA(context); break;
+                case 14: FirstLetter(); break;
                 default: break;
             }
-            
 
+            
+        }
+
+        private static void FirstLetter()
+        {
+            GringottsContext ggcontext = new GringottsContext();
+
+            var letters = ggcontext.WizzardDeposits
+                .Where(wd => wd.DepositGroup == "Troll Chest")
+                .Select(wd => wd.FirstName)
+                .ToList()
+                .Select(fn => fn[0])
+                .Distinct()
+                .OrderBy(c => c);
+                
+
+            foreach (char letter in letters)
+            {
+                Console.WriteLine(letter);
+            }
         }
 
         private static void FindEmployeesWhithSA(SoftuniContext context)

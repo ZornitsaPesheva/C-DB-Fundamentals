@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GringottsContext.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoftuniContext.cs" />
     <Compile Include="Models\Town.cs" />
+    <Compile Include="WizzardDeposit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
