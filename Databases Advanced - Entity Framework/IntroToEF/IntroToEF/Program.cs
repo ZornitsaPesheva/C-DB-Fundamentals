@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace IntroToEF
             Console.WriteLine("4. Employees with Salary Over 50 000");
             Console.WriteLine("5. Employees from Seattle");
             Console.WriteLine("6. Adding a New Address and Updating Employee");
+            Console.WriteLine("7. Find employees in period");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = int.Parse(Console.ReadLine());
@@ -27,9 +29,32 @@ namespace IntroToEF
                 case 4: EmployeeWithSalaryOver50000(context); break;
                 case 5: EmployeesFromSeattle(context); break;
                 case 6: AddingNewAddress(context); break;
+                case 7: FindEmployeesInPeriod(context); break;
                 default: break;
             }
-          
+
+            
+
+        }
+
+        private static void FindEmployeesInPeriod(SoftuniContext context)
+        {
+            List<Employee> employees = context.Employees
+                            .Where(e => e.Projects.Count(p => p.StartDate.Year >= 2001 && p.StartDate.Year <= 2003) > 0)
+                            .Take(30).ToList();
+
+            foreach (Employee e in employees)
+            {
+                Console.WriteLine($"{e.FirstName} {e.LastName} " +
+                    $"{e.Manager.FirstName}");
+                foreach (Project p in e.Projects)
+                {
+                    Console.WriteLine($"--{p.Name} " +
+                        $"{p.StartDate} " +
+                        $"{p.EndDate}");
+
+                }
+            }
         }
 
         private static void AddingNewAddress(SoftuniContext context)
