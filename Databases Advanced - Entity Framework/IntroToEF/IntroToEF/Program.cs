@@ -27,9 +27,18 @@ namespace IntroToEF
             Console.WriteLine("13. Find Employees by First Name starting with SA");
             Console.WriteLine("14. First Letter");
             Console.WriteLine("15. Delete Project by Id");
+            Console.WriteLine("16. Remove Towns");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
-            int input = int.Parse(Console.ReadLine());
+            int input = 0;
+            try
+            {
+                input = int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("You need to enter a number.");
+            }
 
             switch (input)
             {
@@ -46,9 +55,53 @@ namespace IntroToEF
                 case 13: FindEmployeesWhithSA(context); break;
                 case 14: FirstLetter(); break;
                 case 15: DeleteProjectById(context); break;
+                case 16: RemoveTowns(context); break;
                 default: break;
             }
 
+            
+
+        }
+
+        private static void RemoveTowns(SoftuniContext context)
+        {
+            Console.Write("Enter town to delete: ");
+            string town = Console.ReadLine();
+
+            Town tn = context.Towns
+                .Where(t => t.Name == town)
+                .FirstOrDefault();
+
+            List<Address> addrs = context.Addresses
+                .Where(a => a.Town.Name == town)
+                .ToList();
+
+
+
+            context.Towns.Remove(tn);
+            foreach (Address a in addrs)
+            {
+                List<Employee> empls = context.Employees
+                    .Where(e => e.AddressID == a.AddressID)
+                    .ToList();
+
+                foreach (Employee e in empls)
+                {
+                    e.AddressID = null;
+                }
+                context.Addresses.Remove(a);
+            }
+            context.SaveChanges();
+            if (addrs.Count == 1)
+            {
+                Console.WriteLine($"{addrs.Count} " +
+                    $"address in {town} was deleted");
+            }
+            else
+            {
+                Console.WriteLine($"{addrs.Count} " +
+                    $"addresses in {town} were deleted");
+            }
             
         }
 
