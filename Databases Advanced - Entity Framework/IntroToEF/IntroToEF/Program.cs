@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace IntroToEF
             Console.WriteLine("14. First Letter");
             Console.WriteLine("15. Delete Project by Id");
             Console.WriteLine("16. Remove Towns");
+            Console.WriteLine("17. Native SQL Query");
             Console.WriteLine();
             Console.Write("Enter your choise: ");
             int input = 0;
@@ -56,11 +58,54 @@ namespace IntroToEF
                 case 14: FirstLetter(); break;
                 case 15: DeleteProjectById(context); break;
                 case 16: RemoveTowns(context); break;
+                case 17: NativeSQLQuery(context); break;
+
                 default: break;
             }
+          
+        }
 
-            
+        static void NativeSQLQuery(SoftuniContext context)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            PrintNamesWithLinq(context);
+            timer.Stop();
+            Console.WriteLine($"Linq: {timer.Elapsed}");
 
+            timer.Restart();
+            PrintNamesWithNativeSQL(context);
+            Console.WriteLine($"Native SQL: {timer.Elapsed}");
+
+        }
+
+        private static void PrintNamesWithNativeSQL(SoftuniContext context)
+        {
+
+
+            var projects = context.Projects.SqlQuery("SELECT * FROM Projects WHERE YEAR(StartDate) = 2002").ToList();
+
+            foreach (var p in projects)
+            {
+                foreach (var emp in p.Employees)
+                {
+                    Console.WriteLine(emp.FirstName);
+                }
+            }
+        }
+
+        private static void PrintNamesWithLinq(SoftuniContext context)
+        {
+
+            var projects = context.Projects.Where(c => c.StartDate.Year == 2002).ToList();
+
+            foreach (var p in projects)
+            {
+                foreach (var emp in p.Employees)
+                {
+                    Console.WriteLine(emp.FirstName);
+                }
+            }
         }
 
         private static void RemoveTowns(SoftuniContext context)
