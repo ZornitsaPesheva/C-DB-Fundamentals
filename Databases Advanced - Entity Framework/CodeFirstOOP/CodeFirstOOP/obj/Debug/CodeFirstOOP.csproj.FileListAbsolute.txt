@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\CodeFirstOOP.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\CodeFirstOOP.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\CodeFirstOOP.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\obj\Debug\CodeFirstOOP.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\obj\Debug\CodeFirstOOP.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CodeFirstOOP\obj\Debug\CodeFirstOOP.pdb
