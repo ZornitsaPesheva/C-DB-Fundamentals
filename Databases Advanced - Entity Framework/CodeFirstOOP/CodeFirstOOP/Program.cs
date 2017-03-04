@@ -16,6 +16,7 @@ namespace CodeFirstOOP
             Console.WriteLine(" (Create and Print Gosho, Pesho and Stamat)");
             Console.WriteLine("2. Create Person Constructors");
             Console.WriteLine("3. Oldest Family Member");
+            Console.WriteLine("4. Students");
             Console.WriteLine();
             Console.Write("Your choise is: ");
             int option = 0;
@@ -34,8 +35,23 @@ namespace CodeFirstOOP
                 case 1: CreatePersons(); break;
                 case 2: CreateConstructors(); break;
                 case 3: OldestFamilyMember(); break;
+                case 4: Students(); break;
                 default: break;
             }
+            
+        }
+
+        private static void Students()
+        {
+            Console.WriteLine("Enter the student names one by row:");
+            Console.WriteLine("For end type 'end'");
+            string input = Console.ReadLine();
+            while (input != "end")
+            {
+                Student st = new Student(input);
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(Student.count);
         }
 
         private static void OldestFamilyMember()
@@ -43,7 +59,7 @@ namespace CodeFirstOOP
             Family f = new Family();
             Console.Write("Number of persons: ");
             int count = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the input: ");
+            Console.WriteLine("Enter the input (Example: Gosho 23): ");
             for (int i = 1; i <= count; i++)
             {
                 string[] inputArgs =
