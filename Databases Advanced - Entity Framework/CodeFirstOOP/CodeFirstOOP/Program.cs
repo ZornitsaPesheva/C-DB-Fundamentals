@@ -17,6 +17,7 @@ namespace CodeFirstOOP
             Console.WriteLine("2. Create Person Constructors");
             Console.WriteLine("3. Oldest Family Member");
             Console.WriteLine("4. Students");
+            Console.WriteLine("5. Planck Constant");
             Console.WriteLine();
             Console.Write("Your choise is: ");
             int option = 0;
@@ -36,9 +37,15 @@ namespace CodeFirstOOP
                 case 2: CreateConstructors(); break;
                 case 3: OldestFamilyMember(); break;
                 case 4: Students(); break;
+                case 5: PlanckConstant(); break;
                 default: break;
             }
             
+        }
+
+        private static void PlanckConstant()
+        {
+            Console.WriteLine(Calculation.Result());
         }
 
         private static void Students()

@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculation.cs" />
     <Compile Include="CodeFirstContext.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="Person.cs" />
