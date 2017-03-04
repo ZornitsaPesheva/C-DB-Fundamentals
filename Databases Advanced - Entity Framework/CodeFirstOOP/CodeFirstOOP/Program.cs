@@ -18,6 +18,7 @@ namespace CodeFirstOOP
             Console.WriteLine("3. Oldest Family Member");
             Console.WriteLine("4. Students");
             Console.WriteLine("5. Planck Constant");
+            Console.WriteLine("6. Math Utilities");
             Console.WriteLine();
             Console.Write("Your choise is: ");
             int option = 0;
@@ -38,9 +39,45 @@ namespace CodeFirstOOP
                 case 3: OldestFamilyMember(); break;
                 case 4: Students(); break;
                 case 5: PlanckConstant(); break;
+                case 6: MathUtilities(); break;
                 default: break;
             }
+        }
+
+        private static void MathUtilities()
+        {
+            Console.WriteLine("Enter comands (Example: Sum 5 5):");
+            Console.WriteLine("For end enter 'End'");
+            string input = "";
             
+            while (input != "End")
+            {
+                input = Console.ReadLine();
+                if (input != "End")
+                {
+                    string[] arg =
+                input.Split(new char[] { ' ' },
+                StringSplitOptions.RemoveEmptyEntries).ToArray();
+                    double arg1 = double.Parse(arg[1]);
+                    double arg2 = double.Parse(arg[2]);
+                    double result = 0;
+                    switch (arg[0])
+                    {
+                        case "Sum":
+                            result = MathUtil.Sum(arg1, arg2); break;
+                        case "Subtract":
+                            result = MathUtil.Subtract(arg1, arg2); break;
+                        case "Multiply":
+                            result = MathUtil.Multiply(arg1, arg2); break;
+                        case "Divide":
+                            result = MathUtil.Divide(arg1, arg2); break;
+                        case "Percentage":
+                            result = MathUtil.Percantige(arg1, arg2); break;
+                        default: Console.WriteLine("Error"); break;
+                    }
+                    Console.WriteLine("{0:0.00}", result);
+                }           
+            }
         }
 
         private static void PlanckConstant()
