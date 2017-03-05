@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\CreateUser.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\CreateUser.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\CreateUser.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\obj\Debug\CreateUser.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\obj\Debug\CreateUser.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\CreateUser\obj\Debug\CreateUser.pdb
