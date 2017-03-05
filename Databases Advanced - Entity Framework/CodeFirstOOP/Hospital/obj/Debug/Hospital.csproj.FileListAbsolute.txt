@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\Hospital.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\Hospital.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\Hospital.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\obj\Debug\Hospital.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\obj\Debug\Hospital.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Hospital\obj\Debug\Hospital.pdb
