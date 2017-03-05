@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\Gringotts.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\obj\Debug\Gringotts.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\Gringotts.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\Gringotts.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\obj\Debug\Gringotts.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstOOP\Gringotts\obj\Debug\Gringotts.pdb
