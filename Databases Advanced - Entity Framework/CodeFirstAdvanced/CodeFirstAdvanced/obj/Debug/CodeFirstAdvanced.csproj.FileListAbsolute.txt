@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\CodeFirstAdvanced.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\CodeFirstAdvanced.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\CodeFirstAdvanced.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\obj\Debug\CodeFirstAdvanced.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\obj\Debug\CodeFirstAdvanced.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\CodeFirstAdvanced\obj\Debug\CodeFirstAdvanced.pdb

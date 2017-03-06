@@ -1,0 +1,16 @@
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\_3.Sales_Database.exe.config
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\_3.Sales_Database.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\_3.Sales_Database.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\3. Sales Database.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.exe
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.pdb
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.Migrations.InitialCreate.resources
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\3. Sales Database.csproj.GenerateResource.Cache
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.Migrations.AddDescriptionToColumns.resources
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.Migrations.AddDefaultValueSales.resources
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.Migrations.AddFirstNameAndLastName.resources
+C:\Users\zorry\Documents\DBAdvanced\CodeFirstAdvanced\3. Sales Database\obj\Debug\_3.Sales_Database.Migrations.AddDefaultValueOnAge.resources
