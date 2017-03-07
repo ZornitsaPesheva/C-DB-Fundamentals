@@ -1,0 +1,13 @@
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFrameworkRelations.exe.config
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFrameworkRelations.exe
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFrameworkRelations.pdb
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.exe
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.pdb
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.Migrations.EmptyMigration.resources
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.csproj.GenerateResource.Cache
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.Migrations.AddSomeRelations.resources
