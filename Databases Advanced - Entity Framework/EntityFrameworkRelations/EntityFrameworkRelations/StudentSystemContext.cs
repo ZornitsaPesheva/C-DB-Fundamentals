@@ -91,7 +91,7 @@ namespace EntityFrameworkRelations
             : base("name=StudentSystemContext")
         {
             Database.SetInitializer<StudentSystemContext>(
-                new StudentsSystemlDBInitializer());
+                new MigrateDatabaseToLatestVersion<StudentSystemContext, Configuration>());
         }
 
 
