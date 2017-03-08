@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// 1. Code First Student System
 namespace EntityFrameworkRelations.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     public enum ResourceType
     {
         Video, Presentation, Document, Other
@@ -24,7 +24,7 @@ namespace EntityFrameworkRelations.Models
         public ResourceType Type { get; set; }
 
         [Required]
-        public string URL { get; set; }
+        public string Url { get; set; }
 
         public virtual Course Course { get; set; }
     }

@@ -11,3 +11,4 @@ C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRela
 C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.Migrations.EmptyMigration.resources
 C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.csproj.GenerateResource.Cache
 C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.Migrations.AddSomeRelations.resources
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\EntityFrameworkRelations\obj\Debug\EntityFrameworkRelations.Migrations.SomeFieldEdited.resources

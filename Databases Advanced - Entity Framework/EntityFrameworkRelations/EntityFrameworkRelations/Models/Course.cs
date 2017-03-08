@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// 1. Code First Student System
 namespace EntityFrameworkRelations.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     public class Course
     {
         public Course()
         {
             this.Students = new HashSet<Student>();
-            this.Resourses = new HashSet<Resource>();
+            this.Resources = new HashSet<Resource>();
             this.Homeworks = new HashSet<Homework>();
         }
         public int Id { get; set; }
@@ -32,7 +32,7 @@ namespace EntityFrameworkRelations.Models
         public decimal Price { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
-        public virtual ICollection<Resource> Resourses { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
         public virtual ICollection<Homework> Homeworks { get; set; }
     }
 }
