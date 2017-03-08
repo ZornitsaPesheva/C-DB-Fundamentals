@@ -47,6 +47,7 @@ namespace EntityFrameworkRelations.Migrations
                                         {
                                             Name = "Stancho",
                                             RegDate = DateTime.Today,
+                                          //  Birthday = new 
                                             Phone = "08869899899"
                                         }
                                     }

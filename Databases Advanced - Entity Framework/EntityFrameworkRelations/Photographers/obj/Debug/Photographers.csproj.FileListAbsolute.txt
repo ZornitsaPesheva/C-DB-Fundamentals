@@ -1,0 +1,13 @@
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\Photographers.exe.config
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\Photographers.exe
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\Photographers.pdb
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.exe
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.pdb
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.Migrations.Initial.resources
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.csproj.GenerateResource.Cache
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.Migrations.bd.resources
+C:\Users\zorry\Documents\DBAdvanced\EntityFrameworkRelations\Photographers\obj\Debug\Photographers.Migrations.AddedAlbumsAndPictures.resources
