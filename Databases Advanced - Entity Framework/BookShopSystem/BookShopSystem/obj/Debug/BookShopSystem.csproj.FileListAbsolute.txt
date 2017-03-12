@@ -1,0 +1,10 @@
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\BookShopSystem.exe.config
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\BookShopSystem.exe
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\BookShopSystem.pdb
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\EntityFramework.dll
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\EntityFramework.xml
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\obj\Debug\BookShopSystem.csprojResolveAssemblyReference.cache
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\obj\Debug\BookShopSystem.exe
+C:\Users\zorry\Documents\DBAdvanced\BookShopSystem\BookShopSystem\obj\Debug\BookShopSystem.pdb
