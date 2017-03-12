@@ -56,13 +56,12 @@ namespace BookShopSystem.Migrations
             string[] books = File.ReadAllLines("../../Import/books.csv");
 
             for (int i = 1; i < books.Length; i++)
-
-{
-
+            {
                 string[] data = books[i]
                     .Split(',')
-                    .Select(arg => arg.Replace("\" ", string.Empty))
+                    .Select(arg => arg.Replace("\"", string.Empty))
                     .ToArray();
+
                 int authorIndex = i % authorsCount;
                 Author author = context.Authors.Local[authorIndex];
                 EditionType edition = (EditionType)int.Parse(data[0]);

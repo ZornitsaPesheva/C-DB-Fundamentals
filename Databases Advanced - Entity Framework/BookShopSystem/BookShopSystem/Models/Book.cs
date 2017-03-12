@@ -27,6 +27,7 @@ namespace BookShopSystem.Data
         public Book()
         {
             this.Categories = new HashSet<Category>();
+            this.RelatedBooks = new HashSet<Book>();
         }
         public int Id { get; set; }
 
@@ -69,6 +70,8 @@ namespace BookShopSystem.Data
 
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
+
+        public virtual ICollection<Book> RelatedBooks { get; set; }
 
 
     }
