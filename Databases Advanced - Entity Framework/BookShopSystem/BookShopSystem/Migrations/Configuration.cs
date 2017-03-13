@@ -14,6 +14,7 @@ namespace BookShopSystem.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "BookShopSystem.Data.BookShopContext";
         }
 

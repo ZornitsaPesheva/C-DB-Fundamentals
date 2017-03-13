@@ -70,7 +70,6 @@ namespace BookShopSystem.Data
 
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
-
         public virtual ICollection<Book> RelatedBooks { get; set; }
 
 

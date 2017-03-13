@@ -26,8 +26,8 @@ namespace BookShopSystem.Data
                 .WithMany()
                 .Map(m =>
                 {
-                    m.MapLeftKey("RelatedBooks");
-                    m.MapRightKey("Id");
+                    m.MapLeftKey("BookId");
+                    m.MapRightKey("RelatedId");
                     m.ToTable("RelatedBooks");
                 });
             base.OnModelCreating(modelBuilder);
